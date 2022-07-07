@@ -22,7 +22,7 @@
 
 ```
 
-## for mac arch cpu
+## for mac x86_64 cpu
 
 ```bash
 # build runner run
