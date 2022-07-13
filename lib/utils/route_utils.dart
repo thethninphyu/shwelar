@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
+import '../ui/home/home_module.dart';
+
 class RouteUtils {
   static void _goNextPage(
       {@required String routeName, Object args, bool isReplace = false}) {
@@ -52,9 +54,9 @@ class RouteUtils {
   static void changeRoute<M extends ChildModule>(String route,
       {Object args, bool isReplace}) {
     switch (M) {
-      //case HomeModule:
-      //route = "/home$route";
-      //break;
+      case HomeModule:
+        route = "/home$route";
+        break;
     }
     _goNextPage(routeName: route, args: args, isReplace: isReplace ?? false);
   }

@@ -8,10 +8,8 @@ class AuthModule extends ChildModule {
 
   @override
   List<ModularRouter> get routers => ModularRouter.group(
-        //guards: [AuthGuard()],
         routes: [
           ModularRouter(AuthRoutes.auth, child: (_, __) => LoginWidget()),
-        
         ],
       );
 
