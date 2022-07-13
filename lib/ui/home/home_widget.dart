@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shwelar/ui/auth/auth_module.dart';
 import 'package:shwelar/utils/route_utils.dart';
 import '../../main_module/app_routes.dart';
 import '../../utils/colors.dart';
@@ -25,7 +26,7 @@ class _HomeWidgetState extends State<HomeWidget> {
       backgroundColor: ShwelarColors.primaryColor,
       body: InkWell(
         onTap: (){
-          RouteUtils.changeRoute<HomeModule>(AppRoutes.home, isReplace: true);
+          RouteUtils.changeRoute<AuthModule>(AppRoutes.auth, isReplace: true);
           },
         child: SizedBox(
         height: MediaQuery.of(context).size.height,
