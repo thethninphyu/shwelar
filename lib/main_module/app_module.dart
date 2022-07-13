@@ -11,11 +11,11 @@ class AppModule extends MainModule {
   List<Bind> get binds => [];
 
   @override
-  Widget get bootstrap => AppWidget();
+  Widget get bootstrap => const AppWidget();
 
   @override
   List<ModularRouter> get routers => ModularRouter.group(routes: [
-        ModularRouter("/", child: (_, __) => SplashWidget()),
+        ModularRouter(AppRoutes.root, child: (_, __) =>  SplashWidget()),
         ModularRouter(AppRoutes.home, module: HomeModule()),
       ]);
 }

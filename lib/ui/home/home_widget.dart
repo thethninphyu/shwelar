@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:shwelar/ui/auth/widgets/auth_widget.dart';
+import 'package:shwelar/utils/route_utils.dart';
+import '../../main_module/app_routes.dart';
+import '../../utils/colors.dart';
+import 'home_module.dart';
 
 class HomeWidget extends StatefulWidget {
   const HomeWidget({Key key}) : super(key: key);
@@ -13,24 +15,28 @@ class HomeWidget extends StatefulWidget {
 class _HomeWidgetState extends State<HomeWidget> {
   @override
   void initState() {
-    goToHomePage();
     super.initState();
-    SystemChrome.setPreferredOrientations(
-        [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
   }
 
+  
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Image.asset("assets/images/splash_image.png",
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height),
+   return Scaffold(
+      backgroundColor: ShwelarColors.primaryColor,
+      body: InkWell(
+        onTap: (){
+          RouteUtils.changeRoute<HomeModule>(AppRoutes.home, isReplace: true);
+          },
+        child: SizedBox(
+        height: MediaQuery.of(context).size.height,
+                  width: MediaQuery.of(context).size.width,
+        child: Image.asset(
+                  'assets/images/home_screen.png',
+                  fit: BoxFit.cover,
+                ),  //Center
+          ),
+      )  //Center
     );
   }
 
-  void goToHomePage() {
-    Navigator.of(context)
-        .push(MaterialPageRoute(builder: (context) => const AuthWidget()));
-    //RouteUtils.changeRoute<HomeModule>(AppRoutes.home, isReplace: true);
-  }
 }

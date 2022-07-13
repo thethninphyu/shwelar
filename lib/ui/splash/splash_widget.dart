@@ -1,6 +1,8 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:permission_handler/permission_handler.dart';
+import 'package:shwelar/utils/colors.dart';
 
 import '../../main_module/app_routes.dart';
 import '../../utils/route_utils.dart';
@@ -22,28 +24,28 @@ class _SplashWidgetState extends State<SplashWidget> {
     super.initState();
     goToHomePage();
     SystemChrome.setPreferredOrientations(
-        [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+        [DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight]);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Image.asset("assets/images/splash_image.png",
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height),
+      backgroundColor: ShwelarColors.primaryColor,
+      body: SizedBox(
+      height: MediaQuery.of(context).size.height,
+                width: MediaQuery.of(context).size.width,
+      child: Image.asset(
+                'assets/images/splash_screen.png',
+                fit: BoxFit.cover,
+              ),  //Center
+    )  //Center
     );
   }
 
   void goToHomePage() {
-    Permission.camera.request().then((permission) async {
-      if (permission.isGranted) {
-        try {
-          RouteUtils.changeRoute<HomeModule>(AppRoutes.home, isReplace: true);
-        } catch (e) {}
-      } else {
-        openAppSettings();
-      }
-    });
+    Timer(const Duration(seconds: 5),
+          ()=>RouteUtils.changeRoute<HomeModule>(AppRoutes.home, isReplace: true)
+         );
   }
 
   @override
