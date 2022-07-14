@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:shwelar/app_routes.dart';
 import 'package:shwelar/module/auth/auth_module.dart';
+import 'package:shwelar/module/game/game_module.dart';
 import 'package:shwelar/module/home/home_module.dart';
+import 'package:shwelar/module/home/home_routes.dart';
 
 class RouteUtils {
   static void _goNextPage(
@@ -61,6 +63,9 @@ class RouteUtils {
         break;
       case HomeModule:
         tempRoute = AppRoutes.home;
+        break;
+      case GameModule:
+        tempRoute = AppRoutes.home + HomeRoutes.game;
         break;
     }
     _goNextPage(
