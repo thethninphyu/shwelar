@@ -1,11 +1,15 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:shwelar/shared_widgets/shwelar_button.dart';
+import 'package:shwelar/custom/shwelar_button.dart';
+import 'package:shwelar/module/home/home_module.dart';
+import 'package:shwelar/module/home/home_routes.dart';
 import 'package:shwelar/utils/colors.dart';
+import 'package:shwelar/utils/route_utils.dart';
 
 class LoginWidget extends StatefulWidget {
-  final String routePath;
-  const LoginWidget({Key key, @required this.routePath}) : super(key: key);
+  const LoginWidget({
+    Key? key,
+  }) : super(key: key);
 
   @override
   // ignore: library_private_types_in_public_api
@@ -15,7 +19,7 @@ class LoginWidget extends StatefulWidget {
 class _LoginWidgetState extends State<LoginWidget> {
   FocusNode myFocusNode = FocusNode();
   final _formKey = GlobalKey<FormState>();
-  StreamSubscription subscription;
+  StreamSubscription? subscription;
   final FocusNode _userNameFocus = FocusNode();
   final ScrollController _scrollController = ScrollController();
   final TextEditingController _userController = TextEditingController();
@@ -29,7 +33,7 @@ class _LoginWidgetState extends State<LoginWidget> {
 
   @override
   void dispose() {
-    subscription.cancel();
+    subscription!.cancel();
     super.dispose();
   }
 
@@ -46,7 +50,7 @@ class _LoginWidgetState extends State<LoginWidget> {
             padding: const EdgeInsets.all(20),
             decoration: const BoxDecoration(
                 image: DecorationImage(
-                    image: AssetImage('assets/images/home_screen.png'),
+                    image: AssetImage('assets/images/authhome_screen.png'),
                     fit: BoxFit.fill)),
             child: Form(
               key: _formKey,
@@ -54,7 +58,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                 children: <Widget>[
                   Padding(
                     padding: const EdgeInsets.only(top: 50),
-                    child: Image.asset('assets/images/home_screen.png'),
+                    child: Image.asset('assets/images/authhome_screen.png'),
                   ),
                   const SizedBox(
                     height: 24,
@@ -106,7 +110,8 @@ class _LoginWidgetState extends State<LoginWidget> {
                     textColor: Colors.black,
                     backgroundColor: ShwelarColors.primaryColor,
                     onTap: () {
-                      //to do login
+                      RouteUtils.changeRoute<HomeModule>(HomeRoutes.root,
+                          isReplaceAll: true);
                     },
                   )
                 ],

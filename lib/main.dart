@@ -1,7 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:shwelar/main_module/app_module.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-void main(List<String> args) {
-  runApp(ModularApp(module: AppModule()));
+import 'app_module.dart';
+import 'app_widget.dart';
+
+void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations(
+          [DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight])
+      .then((_) {
+    runApp(ModularApp(module: AppModule(), child: const AppWidget()));
+  });
 }

@@ -2,19 +2,19 @@ import 'package:flutter/material.dart';
 
 class ShwelarButton extends StatelessWidget {
   final String text;
-  final double width;
-  final double height;
+  final double? width;
+  final double?height;
   final Function onTap;
-  final Color backgroundColor;
-  final Color textColor;
-  final double textSize;
-  final Widget leading;
-  final Widget tailing;
-  final BorderRadius borderRadius;
+  final Color? backgroundColor;
+  final Color? textColor;
+  final double? textSize;
+  final Widget? leading;
+  final Widget? tailing;
+  final BorderRadius? borderRadius;
   const ShwelarButton({
-    Key key,
-    @required this.text,
-    @required this.onTap,
+    Key? key,
+    required this.text,
+    required this.onTap,
     this.width,
     this.height,
     this.backgroundColor,
@@ -38,7 +38,7 @@ class ShwelarButton extends StatelessWidget {
       disabledTextColor:
           (textColor ?? const Color(0xFF424242)).withOpacity(0.6),
       disabledColor: (backgroundColor ?? Colors.white).withAlpha(200),
-      onPressed: onTap,
+      onPressed: onTap(),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,

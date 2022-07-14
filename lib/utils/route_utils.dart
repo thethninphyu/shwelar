@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-
-import '../ui/home/home_module.dart';
+import 'package:shwelar/app_routes.dart';
+import 'package:shwelar/module/auth/auth_module.dart';
+import 'package:shwelar/module/home/home_module.dart';
 
 class RouteUtils {
   static void _goNextPage(
-      {@required String routeName, Object args, bool isReplace = false}) {
+      {required String routeName, Object? args, bool isReplace = false}) {
     if (args == null) {
       if (isReplace) {
         Modular.to.pushReplacementNamed(routeName);
@@ -22,13 +23,13 @@ class RouteUtils {
   }
 
   static void changeModule(
-      {@required String routeName, Object args, bool isReplace}) {
+      {required String routeName, Object? args, bool? isReplace}) {
     _goNextPage(
-        routeName: routeName, args: args, isReplace: isReplace ?? false);
+        routeName: routeName, args: args!, isReplace: isReplace ?? false);
   }
 
   static void pushNamedAndRemoveUntil(
-      {@required String nextRoute, @required String untailRoute, Object args}) {
+      {required String nextRoute, required String untailRoute, Object? args}) {
     if (args == null) {
       Modular.to
           .pushNamedAndRemoveUntil(nextRoute, ModalRoute.withName(untailRoute));
@@ -39,7 +40,7 @@ class RouteUtils {
     }
   }
 
-  static void popAndPushName({@required String nextRoute, Object args}) {
+  static void popAndPushName({required String nextRoute, Object? args}) {
     if (args == null) {
       Modular.to.popAndPushNamed(nextRoute);
     } else {
@@ -47,17 +48,24 @@ class RouteUtils {
     }
   }
 
-  static void popUntil({@required String routeName}) {
+  static void popUntil({required String routeName}) {
     Modular.to.popUntil(ModalRoute.withName(routeName));
   }
 
-  static void changeRoute<M extends ChildModule>(String route,
-      {Object args, bool isReplace}) {
+  static void changeRoute<M extends Module>(String route,
+     {Object? args, bool? isReplace, bool? isReplaceAll}) {
+    String tempRoute = "";
     switch (M) {
+      case AuthModule:
+        tempRoute = AppRoutes.auth;
+        break;
       case HomeModule:
-        route = "/home$route";
+        tempRoute = AppRoutes.home;
         break;
     }
-    _goNextPage(routeName: route, args: args, isReplace: isReplace ?? false);
+    _goNextPage(
+        routeName: "$tempRoute$route",
+        args: args,
+        isReplace: isReplace ?? false);
   }
 }
