@@ -40,100 +40,180 @@ class _LoginWidgetState extends State<LoginWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ShwelarColors.primaryColor,
-      body: SafeArea(
-        child: SingleChildScrollView(
-          controller: _scrollController,
-          child: Container(
-            height: MediaQuery.of(context).size.height -
-                MediaQuery.of(context).padding.top,
-            padding: const EdgeInsets.all(20),
+      body: Stack(
+        children: [
+          Container(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
             decoration: const BoxDecoration(
                 image: DecorationImage(
-                    image: AssetImage('assets/images/authhome_screen.png'),
-                    fit: BoxFit.fill)),
-            child: Form(
-              key: _formKey,
-              child: Column(
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.only(top: 50),
-                    child: Image.asset('assets/images/authhome_screen.png'),
-                  ),
-                  const SizedBox(
-                    height: 24,
-                  ),
-                  TextFormField(
-                      controller: _userController,
-                      style: const TextStyle(color: Colors.white),
-                      focusNode: _userNameFocus,
-                      onFieldSubmitted: (_) => _fieldFocusChange(
-                          context, _userNameFocus, _passwordFocus),
-                      decoration: InputDecoration(
-                        labelText: "Username",
-                        focusColor: Colors.white,
-                        hoverColor: Colors.white,
-                        labelStyle: const TextStyle(color: Colors.white),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(5.0),
-                          borderSide: const BorderSide(
-                            color: ShwelarColors.primaryColor,
+                    image: AssetImage('assets/images/slbg.jpeg'),
+                    fit: BoxFit.cover)),
+            padding: const EdgeInsets.all(15),
+            child: Stack(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(40, 20, 30, 40),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      border: Border(
+                          top: const BorderSide(
+                              width: 5,
+                              color: Colors.yellow,
+                              style: BorderStyle.solid),
+                          left: BorderSide(
+                              width: 5, color: Colors.amber.shade500),
+                          right: BorderSide(width: 5, color: Colors.amber),
+                          bottom: BorderSide(
+                              width: 5,
+                              color: Colors.amber.shade900,
+                              style: BorderStyle.solid)),
+                      gradient: const LinearGradient(
+                        begin: Alignment.centerLeft,
+                        end: Alignment.centerRight,
+                        colors: [
+                          Color(0xff21173B),
+                          Color(0xff3B1872),
+                          Color(0xff171725)
+                        ],
+                      ),
+                    ),
+                    child: Padding(
+                      padding: EdgeInsets.all(10),
+                      child: Column(
+                        children: [
+                          const SizedBox(
+                            height: 10,
                           ),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(5.0),
-                          borderSide: const BorderSide(
-                            color: ShwelarColors.primaryColor,
-                            width: 2.0,
+                          const Text(
+                            'Account Login',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                                color: Colors.white),
                           ),
-                        ),
-                      )),
-                  const SizedBox(
-                    height: 10,
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          const TextField(
+                            decoration: InputDecoration(
+                                enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        width: 2,
+                                        color: Colors.grey,
+                                        style: BorderStyle.solid)),
+                                prefixIcon:
+                                    Icon(Icons.person, color: Colors.grey),
+                                hintText: 'Name',
+                                hintStyle: TextStyle(
+                                    color: Colors.grey,
+                                    fontWeight: FontWeight.bold),
+                                border: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        width: 5,
+                                        color: Colors.red,
+                                        style: BorderStyle.solid))),
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          const TextField(
+                            decoration: InputDecoration(
+                                enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        width: 2,
+                                        color: Colors.grey,
+                                        style: BorderStyle.solid)),
+                                prefixIcon: Icon(
+                                  Icons.key,
+                                  color: Colors.grey,
+                                ),
+                                hintText: 'Password',
+                                hintStyle: TextStyle(
+                                    color: Colors.grey,
+                                    fontWeight: FontWeight.bold),
+                                border: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        width: 5,
+                                        color: Colors.white,
+                                        style: BorderStyle.solid))),
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          InkWell(
+                            onTap: () {
+                              RouteUtils.changeRoute<HomeModule>(
+                                  HomeRoutes.root,
+                                  isReplace: true);
+                            },
+                            child: Container(
+                              margin: const EdgeInsets.all(4.0),
+                              padding: const EdgeInsets.all(8.0),
+                              alignment: Alignment.center,
+                              width: 300,
+                              height: 55,
+                              // ignore: sort_child_properties_last
+                              child: const Text(
+                                "ENTER GAME",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              decoration: ShapeDecoration(
+                                  shadows: const [
+                                    BoxShadow(
+                                      color: Color.fromARGB(255, 20, 12, 38),
+                                      spreadRadius: 5,
+                                      blurRadius: 15,
+                                      offset: Offset(0, 3),
+                                    )
+                                  ],
+                                  gradient: const LinearGradient(
+                                      begin: Alignment.topCenter,
+                                      end: Alignment.bottomCenter,
+                                      colors: [
+                                        Color.fromARGB(225, 113, 84, 195),
+                                        Color.fromARGB(255, 58, 36, 123)
+                                      ]),
+                                  shape: BeveledRectangleBorder(
+                                    borderRadius: BorderRadius.circular(30),
+                                    side: const BorderSide(
+                                      style: BorderStyle.solid,
+                                      width: 2,
+                                      color: Color.fromARGB(255, 113, 77, 255),
+                                    ),
+                                  )),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
                   ),
-                  const Text(
-                    "လျိုဝှက်နံပါတ် ရိုက်ထည့်ရန်",
-                    style: TextStyle(
+                ),
+                Positioned(
+                    right: 18,
+                    top: 5,
+                    child: Container(
+                      height: 30,
+                      width: 30,
+                      decoration: BoxDecoration(
+                          border: Border.all(width: 4, color: Colors.orange),
+                          color: Colors.orange.shade300,
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(100))),
+                      child: const Icon(
+                        Icons.clear_outlined,
                         color: Colors.white,
-                        fontSize: 14,
-                        fontFamily: 'Roboto'),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  _passwordForm(),
-                  const SizedBox(
-                    height: 50,
-                  ),
-                  ShwelarButton(
-                    text: "ရှေ့ဆက်ရန် နှိပ်ပါ",
-                    textColor: Colors.black,
-                    backgroundColor: ShwelarColors.primaryColor,
-                    onTap: () {
-                      RouteUtils.changeRoute<HomeModule>(HomeRoutes.root,
-                          isReplaceAll: true);
-                    },
-                  )
-                ],
-              ),
+                      ),
+                    ))
+              ],
             ),
           ),
-        ),
-      ),
-    );
-  }
-
-  void _fieldFocusChange(
-      BuildContext context, FocusNode currentFocus, FocusNode nextFocus) {
-    currentFocus.unfocus();
-    FocusScope.of(context).requestFocus(nextFocus);
-  }
-
-  Widget _passwordForm() {
-    return Form(
-      key: _formKeyforPassword,
-      child: GestureDetector(
-        onLongPress: () {},
+        ],
       ),
     );
   }
