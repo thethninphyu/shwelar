@@ -1,8 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:shwelar/app_routes.dart';
-import 'package:shwelar/module/auth/auth_module.dart';
-import 'package:shwelar/utils/colors.dart';
-import 'package:shwelar/utils/route_utils.dart';
 
 class HomeWidget extends StatefulWidget {
   const HomeWidget({Key? key}) : super(key: key);
@@ -20,6 +16,113 @@ class _HomeWidgetState extends State<HomeWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold();
+    return Scaffold(
+      body: Stack(
+        children: [
+          Image(
+              image: Image.asset("assets/images/background/Image.png").image,
+              fit: BoxFit.fill),
+          Column(
+            children: [
+              Container(
+                height: 55,
+                width: double.infinity,
+                decoration: const BoxDecoration(
+                  gradient: RadialGradient(
+                    colors: [
+                      Color(0xFF3E3384),
+                      Color(0xFF211263),
+                    ],
+                    radius: 1.0,
+                  ),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    //
+                    Row(
+                      children: [
+                        Container(
+                          width: 35,
+                          height: 35,
+                          margin: const EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(40)),
+                        ),
+                        const Text(
+                          "Ko Htut",
+                          style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              const Expanded(
+                child: Center(
+                  child: Text('Home'),
+                ),
+              ),
+              Container(
+                height: 55,
+                decoration: const BoxDecoration(
+                  gradient: RadialGradient(
+                    // center: Alignment(-0.8, -0.6),
+                    colors: [Color(0xFF3E3384), Color(0xFF211263)],
+                    radius: 1.0,
+                  ),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: const [
+                    //
+                    Text(
+                      "HOME",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w800),
+                    ),
+                    Text(
+                      "SLOT",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w800),
+                    ),
+                    Text(
+                      "DRAW",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w800),
+                    ),
+                    Text(
+                      "FISHING",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w800),
+                    ),
+                    Text(
+                      "ROUTTE",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w800),
+                    ),
+                  ],
+                ),
+              )
+            ],
+          ),
+        ],
+      ),
+    );
   }
 }
