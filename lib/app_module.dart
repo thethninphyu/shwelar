@@ -3,6 +3,8 @@ import 'package:logger/logger.dart';
 import 'package:shwelar/app_routes.dart';
 import 'package:shwelar/clients/api_clients.dart';
 import 'package:shwelar/module/auth/auth_module.dart';
+import 'package:shwelar/module/home/respositories/home_repo_impl.dart';
+import 'package:shwelar/module/home/store/game_store.dart';
 import 'package:shwelar/module/not_found_widget.dart';
 import 'package:shwelar/module/splash/splash_widget.dart';
 import 'package:shwelar/services/api_service.dart';
@@ -16,6 +18,8 @@ class AppModule extends Module {
         Bind.singleton((i) => Logger(printer: PrettyPrinter(methodCount: 0))),
         Bind.singleton((i) => APIClient()),
         Bind.singleton((i) => APIService.create(i.get<APIClient>())),
+        Bind.singleton((i) => GameStore()),
+        Bind.singleton((i) => HomeRepositoryImpl.instance),
       ];
 
   @override
