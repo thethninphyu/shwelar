@@ -23,6 +23,9 @@ abstract class _AuthStoreBase with Store {
   bool isLogin = false;
 
   @observable
+  String username = "";
+
+  @observable
   String token = "";
 
   @observable
@@ -35,11 +38,30 @@ abstract class _AuthStoreBase with Store {
   Auth auth = Auth();
 
   @action
-  Future<void> getAuth({required Function() success}) async {
+  Future<void> init() async {
+    Box box1 = await Hive.openBox('logindata');
+    var test = box1.get('token');
+    var ukey = box1.get('key');
+    var uname = box1.get('username');
+    if (test != null && test != "") {
+      token = test;
+      key = ukey;
+      username = uname;
+      isLogin = true;
+    } else {
+      isLogin = false;
+    }
+  }
+
+  @action
+  Future<void> getAuth(
+      {required String username,
+      required String password,
+      required Function() success}) async {
     try {
       isLoading = true;
       errorMessage = "";
-      var data = await _repo.getAuth();
+      var data = await _repo.getAuth(password: password, username: username);
       auth = data;
       token = data.token!;
       key = data.key!.keygen!;
@@ -54,5 +76,12 @@ abstract class _AuthStoreBase with Store {
       debugPrint('Error is ${e.toString()}');
       errorMessage = e.toString();
     }
+  }
+
+  @action
+  Future<void> logout() async {
+    token = "";
+    isLogin = false;
+    await _repo.logout();
   }
 }

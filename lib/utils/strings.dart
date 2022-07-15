@@ -1,7 +1,7 @@
 class StringUtils {
   static const AppName = "shwelar";
   static const LimitlessCasinoExperience = "A Limitless Casino Experience";
-  static const RightsReserved = "© 2021 Shan234. All rights reserved.";
+  static const RightsReserved = "© 2022 ShweLar. All rights reserved.";
 
   static const StartPlaying = "Start Playing";
   static const AccountLogin = "Account Login";

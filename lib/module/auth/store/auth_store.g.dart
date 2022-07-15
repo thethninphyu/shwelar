@@ -41,6 +41,22 @@ mixin _$AuthStore on _AuthStoreBase, Store {
     });
   }
 
+  late final _$usernameAtom =
+      Atom(name: '_AuthStoreBase.username', context: context);
+
+  @override
+  String get username {
+    _$usernameAtom.reportRead();
+    return super.username;
+  }
+
+  @override
+  set username(String value) {
+    _$usernameAtom.reportWrite(value, super.username, () {
+      super.username = value;
+    });
+  }
+
   late final _$tokenAtom = Atom(name: '_AuthStoreBase.token', context: context);
 
   @override
@@ -102,12 +118,32 @@ mixin _$AuthStore on _AuthStoreBase, Store {
     });
   }
 
+  late final _$initAsyncAction =
+      AsyncAction('_AuthStoreBase.init', context: context);
+
+  @override
+  Future<void> init() {
+    return _$initAsyncAction.run(() => super.init());
+  }
+
   late final _$getAuthAsyncAction =
       AsyncAction('_AuthStoreBase.getAuth', context: context);
 
   @override
-  Future<void> getAuth({required dynamic Function() success}) {
-    return _$getAuthAsyncAction.run(() => super.getAuth(success: success));
+  Future<void> getAuth(
+      {required String username,
+      required String password,
+      required dynamic Function() success}) {
+    return _$getAuthAsyncAction.run(() => super
+        .getAuth(username: username, password: password, success: success));
+  }
+
+  late final _$logoutAsyncAction =
+      AsyncAction('_AuthStoreBase.logout', context: context);
+
+  @override
+  Future<void> logout() {
+    return _$logoutAsyncAction.run(() => super.logout());
   }
 
   @override
@@ -115,6 +151,7 @@ mixin _$AuthStore on _AuthStoreBase, Store {
     return '''
 isLoading: ${isLoading},
 isLogin: ${isLogin},
+username: ${username},
 token: ${token},
 key: ${key},
 errorMessage: ${errorMessage},

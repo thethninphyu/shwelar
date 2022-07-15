@@ -12,14 +12,14 @@ class ShwelarButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
+    return GestureDetector(
       onTap: onTap,
       child: Container(
         margin: const EdgeInsets.all(4.0),
         padding: const EdgeInsets.all(8.0),
         alignment: Alignment.center,
-        width: 300,
-        height: 48,
+        width: 275,
+        height: 45,
         decoration: ShapeDecoration(
             shadows: const [
               BoxShadow(
@@ -37,7 +37,7 @@ class ShwelarButton extends StatelessWidget {
                   Color.fromARGB(255, 58, 36, 123)
                 ]),
             shape: BeveledRectangleBorder(
-              borderRadius: BorderRadius.circular(24),
+              borderRadius: BorderRadius.circular(23),
               side: const BorderSide(
                 style: BorderStyle.solid,
                 width: 2,

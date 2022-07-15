@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:shwelar/app_routes.dart';
 import 'package:shwelar/module/auth/auth_module.dart';
 import 'package:shwelar/module/auth/store/auth_store.dart';
@@ -30,15 +31,20 @@ class _SplashWidgetState extends State<SplashWidget> {
   @override
   void initState() {
     super.initState();
-    setAuth();
+    initS();
   }
 
-  void setAuth() {
-    _authStore.getAuth(success: () {
+  initS() async {
+    await _authStore.init();
+    Box box1 = await Hive.openBox('logindata');
+    var test = box1.get('token');
+    if (test != null) {
       _profileStore.getPlayerSurce(success: () {
         goToHomePage();
       });
-    });
+    } else {
+      RouteUtils.changeRoute<AuthModule>(AppRoutes.root, isReplace: true);
+    }
   }
 
   @override
@@ -103,7 +109,7 @@ class _SplashWidgetState extends State<SplashWidget> {
 
   void goToHomePage() {
     Timer(const Duration(seconds: 2), () {
-      if (_authStore.isLoading = false) {
+      if (_authStore.isLogin == false) {
         RouteUtils.changeRoute<AuthModule>(AppRoutes.root, isReplace: true);
       } else {
         RouteUtils.changeRoute<HomeModule>(HomeRoutes.root, isReplace: true);

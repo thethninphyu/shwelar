@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
+import 'package:shwelar/module/auth/store/auth_store.dart';
 import 'package:shwelar/module/profile/repositories/profile_repo.dart';
 
 part 'profile_store.g.dart';
@@ -13,6 +14,7 @@ abstract class _ProfileStoreBase with Store {
   //
 
   final ProfileRepository _repo = Modular.get<ProfileRepository>();
+
 
   @observable
   bool isLoading = false;
@@ -28,6 +30,7 @@ abstract class _ProfileStoreBase with Store {
     try {
       isLoading = true;
       errorMessage = "";
+      source = "";
       var data = await _repo.getPlayerSource();
       source = data.data!.playerScore!;
       success();

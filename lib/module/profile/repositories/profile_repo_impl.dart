@@ -15,8 +15,8 @@ class ProfileRepositoryImpl implements ProfileRepository {
 
   @override
   Future<PlayerReadResponse> getPlayerSource() async {
-    String username = "demo2";
-    var response = await _apiService.getPlayerSource(_authStore.key, username);
+    var response =
+        await _apiService.getPlayerSource(_authStore.key, _authStore.username);
     return response.body!;
   }
 }

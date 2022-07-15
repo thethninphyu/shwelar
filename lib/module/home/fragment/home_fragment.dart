@@ -7,7 +7,7 @@ import 'package:shwelar/module/home/store/game_store.dart';
 import 'package:shwelar/utils/route_utils.dart';
 
 class HomeFragment extends StatefulWidget {
-  HomeFragment({Key? key}) : super(key: key);
+  const HomeFragment({Key? key}) : super(key: key);
 
   @override
   State<HomeFragment> createState() => _HomeFragmentState();
@@ -31,7 +31,12 @@ class _HomeFragmentState extends State<HomeFragment> {
           child: CircularProgressIndicator(),
         );
       } else if (_gameStore.errorMessage.isNotEmpty) {
-        return Text(_gameStore.errorMessage);
+        return Center(
+            child: Text(
+          _gameStore.errorMessage,
+          style: const TextStyle(
+              color: Colors.red, fontWeight: FontWeight.w700, fontSize: 15),
+        ));
       }
       return ListView.builder(
           scrollDirection: Axis.horizontal,
