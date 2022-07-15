@@ -19,7 +19,7 @@ class APIInterceptor extends RequestInterceptor {
 
     return request.copyWith(headers: {
       HttpHeaders.acceptHeader: "application/json",
-      HttpHeaders.authorizationHeader: "Bearer ${Config.token}",
+      HttpHeaders.authorizationHeader: "Bearer $token",
     });
     //  return request;
   }
