@@ -10,6 +10,7 @@ class AppWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       title: StringUtils.AppName,
+      debugShowCheckedModeBanner: false,
        theme: ThemeData.light().copyWith(
         useMaterial3: true,
           primaryColor: ShwelarColors.primaryColor,

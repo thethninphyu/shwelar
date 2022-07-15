@@ -8,6 +8,8 @@ import 'package:shwelar/module/auth/store/auth_store.dart';
 import 'package:shwelar/module/home/respositories/home_repo_impl.dart';
 import 'package:shwelar/module/home/store/game_store.dart';
 import 'package:shwelar/module/not_found_widget.dart';
+import 'package:shwelar/module/profile/repositories/profile_repo_impl.dart';
+import 'package:shwelar/module/profile/store/profile_store.dart';
 import 'package:shwelar/module/splash/splash_widget.dart';
 import 'package:shwelar/services/api_service.dart';
 import 'guards/auth_guards.dart';
@@ -21,6 +23,8 @@ class AppModule extends Module {
         Bind.singleton((i) => APIClient()),
         Bind.singleton((i) => APIService.create(i.get<APIClient>())),
         Bind.singleton((i) => GameStore()),
+        Bind.singleton((i) => ProfileStore()),
+        Bind.singleton((i) => ProfileRepositoryImpl.instance),
         Bind.singleton((i) => AuthStore()),
         Bind.singleton((i) => AuthRepositoryImpl.instance),
         Bind.singleton((i) => HomeRepositoryImpl.instance),

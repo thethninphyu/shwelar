@@ -12,6 +12,8 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(GameListResponse.serializer)
       ..add(Key.serializer)
       ..add(Meta.serializer)
+      ..add(PlayerReadResponse.serializer)
+      ..add(Score.serializer)
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(Game)]),
           () => new ListBuilder<Game>()))

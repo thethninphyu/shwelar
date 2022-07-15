@@ -1,6 +1,7 @@
 import 'package:chopper/chopper.dart';
 import 'package:shwelar/models/data/auth.dart';
 import 'package:shwelar/models/response/game_list_response.dart';
+import 'package:shwelar/models/response/player_read_response.dart';
 
 part 'api_service.chopper.dart';
 
@@ -17,4 +18,9 @@ abstract class APIService extends ChopperService {
   @FactoryConverter(request: FormUrlEncodedConverter.requestFactory)
   Future<Response<GameListResponse>> getGame(
       @Query('key') String key, @Query('page') String page);
+
+  @Get(path: '/player/read')
+  @FactoryConverter(request: FormUrlEncodedConverter.requestFactory)
+  Future<Response<PlayerReadResponse>> getPlayerSource(
+      @Query('key') String key, @Query('username') String username);
 }

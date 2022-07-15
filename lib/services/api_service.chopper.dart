@@ -33,4 +33,14 @@ class _$APIService extends APIService {
     return client.send<GameListResponse, GameListResponse>($request,
         requestConverter: FormUrlEncodedConverter.requestFactory);
   }
+
+  @override
+  Future<Response<PlayerReadResponse>> getPlayerSource(
+      String key, String username) {
+    final $url = '/api/player/read';
+    final $params = <String, dynamic>{'key': key, 'username': username};
+    final $request = Request('GET', $url, client.baseUrl, parameters: $params);
+    return client.send<PlayerReadResponse, PlayerReadResponse>($request,
+        requestConverter: FormUrlEncodedConverter.requestFactory);
+  }
 }

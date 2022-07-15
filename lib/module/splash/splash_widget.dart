@@ -8,6 +8,7 @@ import 'package:shwelar/app_routes.dart';
 import 'package:shwelar/module/auth/auth_module.dart';
 import 'package:shwelar/module/auth/store/auth_store.dart';
 import 'package:shwelar/module/home/home_routes.dart';
+import 'package:shwelar/module/profile/store/profile_store.dart';
 import 'package:shwelar/utils/colors.dart';
 import '../../utils/route_utils.dart';
 import '../home/home_module.dart';
@@ -24,6 +25,7 @@ class _SplashWidgetState extends State<SplashWidget> {
   var disposers = [];
 
   final AuthStore _authStore = Modular.get<AuthStore>();
+  final ProfileStore _profileStore = Modular.get<ProfileStore>();
 
   @override
   void initState() {
@@ -33,7 +35,9 @@ class _SplashWidgetState extends State<SplashWidget> {
 
   void setAuth() {
     _authStore.getAuth(success: () {
-      goToHomePage();
+      _profileStore.getPlayerSurce(success: () {
+        goToHomePage();
+      });
     });
   }
 
@@ -73,9 +77,23 @@ class _SplashWidgetState extends State<SplashWidget> {
                         ),
                       );
                     } else if (_authStore.errorMessage.isNotEmpty) {
-                      return Text(_authStore.errorMessage);
+                      return Text(
+                        _authStore.errorMessage,
+                        style: const TextStyle(
+                          color: Colors.red,
+                          fontWeight: FontWeight.w800,
+                        ),
+                        textAlign: TextAlign.center,
+                      );
                     }
-                    return Text("Please wait...");
+                    return const Text(
+                      "Please wait...",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w800,
+                      ),
+                      textAlign: TextAlign.center,
+                    );
                   }))
             ],
           ),
@@ -84,7 +102,7 @@ class _SplashWidgetState extends State<SplashWidget> {
   }
 
   void goToHomePage() {
-    Timer(const Duration(seconds: 3), () {
+    Timer(const Duration(seconds: 2), () {
       if (_authStore.isLoading = false) {
         RouteUtils.changeRoute<AuthModule>(AppRoutes.root, isReplace: true);
       } else {
