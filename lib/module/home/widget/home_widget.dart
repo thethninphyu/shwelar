@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shwelar/module/home/widget/game_list.dart';
 
 class HomeWidget extends StatefulWidget {
   const HomeWidget({Key? key}) : super(key: key);
@@ -63,10 +64,8 @@ class _HomeWidgetState extends State<HomeWidget> {
                   ],
                 ),
               ),
-              const Expanded(
-                child: Center(
-                  child: Text('Home'),
-                ),
+              Expanded(
+                child: GameListWidget(),
               ),
               Container(
                 height: 55,
@@ -79,49 +78,105 @@ class _HomeWidgetState extends State<HomeWidget> {
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: const [
+                  children: [
                     //
-                    Text(
-                      "HOME",
-                      style: TextStyle(
+                    _btmtabitem(
+                        icon: const Icon(
+                          Icons.home_filled,
                           color: Colors.white,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w800),
-                    ),
-                    Text(
-                      "SLOT",
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w800),
-                    ),
-                    Text(
-                      "DRAW",
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w800),
-                    ),
-                    Text(
-                      "FISHING",
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w800),
-                    ),
-                    Text(
-                      "ROUTTE",
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w800),
-                    ),
+                        ),
+                        name: "HOME",
+                        isActive: true,
+                        onTap: () {
+                          //
+                        }),
+                    _btmtabitem(
+                        icon: const ImageIcon(
+                          AssetImage(
+                            'assets/icon/slot.png',
+                          ),
+                          color: Colors.grey,
+                        ),
+                        isActive: false,
+                        name: "SLOT",
+                        onTap: () {
+                          //
+                        }),
+                    _btmtabitem(
+                        icon: const ImageIcon(
+                          AssetImage('assets/icon/dice.png'),
+                          color: Colors.grey,
+                        ),
+                        name: "DRAW",
+                        isActive: false,
+                        onTap: () {
+                          //
+                        }),
+                    _btmtabitem(
+                        icon: const ImageIcon(
+                          AssetImage('assets/icon/fish.png'),
+                          color: Colors.grey,
+                        ),
+                        name: "FISHING",
+                        isActive: false,
+                        onTap: () {
+                          //
+                        }),
+                    _btmtabitem(
+                        icon: const ImageIcon(
+                          AssetImage('assets/icon/roule.png'),
+                          color: Colors.grey,
+                        ),
+                        name: "ROUTTE",
+                        isActive: false,
+                        onTap: () {
+                          //
+                        }),
                   ],
                 ),
               )
             ],
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _btmtabitem({
+    required String name,
+    required Widget icon,
+    required Function onTap,
+    required bool isActive,
+  }) {
+    return Expanded(
+      child: Container(
+        width: double.infinity,
+        height: double.infinity,
+        decoration: BoxDecoration(
+            image: isActive
+                ? const DecorationImage(
+                    image: AssetImage(
+                      "assets/images/background/tab_bg_shadow.png",
+                    ),
+                    fit: BoxFit.fill)
+                : null),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            icon,
+            const SizedBox(
+              width: 5,
+            ),
+            Text(
+              name,
+              style: TextStyle(
+                  color: isActive ? Colors.white : Colors.grey,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w800),
+            ),
+          ],
+        ),
       ),
     );
   }
