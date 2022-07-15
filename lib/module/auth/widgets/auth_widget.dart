@@ -65,12 +65,12 @@ class _AuthWidgetState extends State<AuthWidget> {
         Row(
           children: [
             Expanded(
-              child: SizedBox(
+              child: Container(
                 height: MediaQuery.of(context).size.height,
-                width: MediaQuery.of(context).size.width,
+                margin: const EdgeInsets.only(top: kToolbarHeight),
                 child: Image.asset(
                   'assets/images/shwelar_dealer.png',
-                  fit: BoxFit.cover,
+                  fit: BoxFit.contain,
                 ), //Center
               ),
             ),
@@ -264,7 +264,7 @@ class _AuthWidgetState extends State<AuthWidget> {
                                     if (_formKey.currentState!.validate()) {
                                       form!.save();
                                       _authStore.getAuth(
-                                          username: userNameController.text,
+                                          name: userNameController.text,
                                           password: passwordController.text,
                                           success: () {
                                             _profileStore.getPlayerSurce(

@@ -131,11 +131,11 @@ mixin _$AuthStore on _AuthStoreBase, Store {
 
   @override
   Future<void> getAuth(
-      {required String username,
+      {required String name,
       required String password,
       required dynamic Function() success}) {
-    return _$getAuthAsyncAction.run(() => super
-        .getAuth(username: username, password: password, success: success));
+    return _$getAuthAsyncAction.run(
+        () => super.getAuth(name: name, password: password, success: success));
   }
 
   late final _$logoutAsyncAction =

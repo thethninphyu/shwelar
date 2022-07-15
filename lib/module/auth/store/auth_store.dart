@@ -55,16 +55,17 @@ abstract class _AuthStoreBase with Store {
 
   @action
   Future<void> getAuth(
-      {required String username,
+      {required String name,
       required String password,
       required Function() success}) async {
     try {
       isLoading = true;
       errorMessage = "";
-      var data = await _repo.getAuth(password: password, username: username);
+      var data = await _repo.getAuth(password: password, username: name);
       auth = data;
       token = data.token!;
       key = data.key!.keygen!;
+      username = name;
       isLoading = false;
       isLogin = true;
       success();
