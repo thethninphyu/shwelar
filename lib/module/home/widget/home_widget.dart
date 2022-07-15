@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shwelar/module/home/widget/game_list.dart';
+import 'package:shwelar/module/home/widget/shwelar_bottom_navigation_bar_item.dart';
 
 class HomeWidget extends StatefulWidget {
   const HomeWidget({Key? key}) : super(key: key);
@@ -10,6 +11,16 @@ class HomeWidget extends StatefulWidget {
 }
 
 class _HomeWidgetState extends State<HomeWidget> {
+  int pageIndex = 0;
+
+  final pages = [
+    GameListWidget(),
+    GameListWidget(),
+    GameListWidget(),
+    GameListWidget(),
+    GameListWidget(),
+  ];
+
   @override
   void initState() {
     super.initState();
@@ -18,6 +29,84 @@ class _HomeWidgetState extends State<HomeWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: Container(
+        height: 55,
+        decoration: const BoxDecoration(
+          gradient: RadialGradient(
+            // center: Alignment(-0.8, -0.6),
+            colors: [Color(0xFF3E3384), Color(0xFF211263)],
+            radius: 1.0,
+          ),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            //
+            shwelarBottomNavigationBarItem(
+                icon: Icon(
+                  Icons.home_filled,
+                  color: (pageIndex == 0) ? Colors.white: Colors.grey,
+                ),
+                name: "HOME",
+                isActive: pageIndex == 0,
+                onTap: () {
+                  setState(() {
+                    pageIndex = 0;
+                  });
+                }),
+            shwelarBottomNavigationBarItem(
+                icon: ImageIcon(
+                  const AssetImage(
+                    'assets/icon/slot.png',
+                  ),
+                  color: (pageIndex == 1) ? Colors.white: Colors.grey,
+                ),
+                isActive: pageIndex == 1,
+                name: "SLOT",
+                onTap: () {
+                  setState(() {
+                    pageIndex = 1;
+                  });
+                }),
+            shwelarBottomNavigationBarItem(
+                icon: ImageIcon(
+                  const AssetImage('assets/icon/dice.png'),
+                  color: (pageIndex == 2) ? Colors.white: Colors.grey,
+                ),
+                name: "DRAW",
+                isActive: pageIndex == 2,
+                onTap: () {
+                  setState(() {
+                    pageIndex = 2;
+                  });
+                }),
+            shwelarBottomNavigationBarItem(
+                icon: ImageIcon(
+                  const AssetImage('assets/icon/fish.png'),
+                  color: (pageIndex == 3) ? Colors.white: Colors.grey,
+                ),
+                name: "FISHING",
+                isActive: pageIndex == 3,
+                onTap: () {
+                  setState(() {
+                    pageIndex = 3;
+                  });
+                }),
+            shwelarBottomNavigationBarItem(
+                icon: ImageIcon(
+                  const AssetImage('assets/icon/roule.png'),
+                  color: (pageIndex == 4) ? Colors.white: Colors.grey,
+                ),
+                name: "ROUTTE",
+                isActive: pageIndex == 4,
+                onTap: () {
+                  setState(() {
+                    pageIndex = 4;
+                  });
+                }),
+          ],
+        ),
+      ),
       body: Stack(
         children: [
           Image(
@@ -65,118 +154,11 @@ class _HomeWidgetState extends State<HomeWidget> {
                 ),
               ),
               Expanded(
-                child: GameListWidget(),
+                child: pages[pageIndex],
               ),
-              Container(
-                height: 55,
-                decoration: const BoxDecoration(
-                  gradient: RadialGradient(
-                    // center: Alignment(-0.8, -0.6),
-                    colors: [Color(0xFF3E3384), Color(0xFF211263)],
-                    radius: 1.0,
-                  ),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    //
-                    _btmtabitem(
-                        icon: const Icon(
-                          Icons.home_filled,
-                          color: Colors.white,
-                        ),
-                        name: "HOME",
-                        isActive: true,
-                        onTap: () {
-                          //
-                        }),
-                    _btmtabitem(
-                        icon: const ImageIcon(
-                          AssetImage(
-                            'assets/icon/slot.png',
-                          ),
-                          color: Colors.grey,
-                        ),
-                        isActive: false,
-                        name: "SLOT",
-                        onTap: () {
-                          //
-                        }),
-                    _btmtabitem(
-                        icon: const ImageIcon(
-                          AssetImage('assets/icon/dice.png'),
-                          color: Colors.grey,
-                        ),
-                        name: "DRAW",
-                        isActive: false,
-                        onTap: () {
-                          //
-                        }),
-                    _btmtabitem(
-                        icon: const ImageIcon(
-                          AssetImage('assets/icon/fish.png'),
-                          color: Colors.grey,
-                        ),
-                        name: "FISHING",
-                        isActive: false,
-                        onTap: () {
-                          //
-                        }),
-                    _btmtabitem(
-                        icon: const ImageIcon(
-                          AssetImage('assets/icon/roule.png'),
-                          color: Colors.grey,
-                        ),
-                        name: "ROUTTE",
-                        isActive: false,
-                        onTap: () {
-                          //
-                        }),
-                  ],
-                ),
-              )
             ],
           ),
         ],
-      ),
-    );
-  }
-
-  Widget _btmtabitem({
-    required String name,
-    required Widget icon,
-    required Function onTap,
-    required bool isActive,
-  }) {
-    return Expanded(
-      child: Container(
-        width: double.infinity,
-        height: double.infinity,
-        decoration: BoxDecoration(
-            image: isActive
-                ? const DecorationImage(
-                    image: AssetImage(
-                      "assets/images/background/tab_bg_shadow.png",
-                    ),
-                    fit: BoxFit.fill)
-                : null),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            icon,
-            const SizedBox(
-              width: 5,
-            ),
-            Text(
-              name,
-              style: TextStyle(
-                  color: isActive ? Colors.white : Colors.grey,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w800),
-            ),
-          ],
-        ),
       ),
     );
   }
