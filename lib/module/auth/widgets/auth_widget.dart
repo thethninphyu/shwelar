@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:shwelar/app_routes.dart';
@@ -50,176 +51,129 @@ class _AuthWidgetState extends State<AuthWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ShwelarColors.primaryColor,
-      body: Stack(children: [
-        Opacity(
-          opacity: 0.4,
-          child: SizedBox(
-            height: MediaQuery.of(context).size.height,
-            width: MediaQuery.of(context).size.width,
-            child: Image.asset(
-              'assets/images/slbg.jpeg',
-              fit: BoxFit.cover,
-            ), //Center
-          ),
-        ),
-        Row(
-          children: [
-            Expanded(
-              child: Container(
-                height: MediaQuery.of(context).size.height,
-                margin: const EdgeInsets.only(top: kToolbarHeight),
-                child: Image.asset(
-                  'assets/images/shwelar_dealer.png',
-                  fit: BoxFit.contain,
-                ), //Center
-              ),
+      body: Stack(
+        children: [
+          Opacity(
+            opacity: 0.4,
+            child: SizedBox(
+              height: MediaQuery.of(context).size.height,
+              width: MediaQuery.of(context).size.width,
+              child: Image.asset(
+                'assets/images/slbg.jpeg',
+                fit: BoxFit.cover,
+              ), //Center
             ),
-            Expanded(
-              child: SafeArea(
-                child: !isClickedStartPlaying
-                    ? Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Image.asset(
-                            'assets/images/shwelar_splash.png',
-                            fit: BoxFit.cover,
-                          ),
-                          Text(
-                            StringUtils.LimitlessCasinoExperience,
-                            style: GoogleFonts.sansita(
-                              textStyle: Theme.of(context).textTheme.headline4,
-                              fontSize: 22,
-                              color: Colors.white,
-                              fontWeight: FontWeight.w400,
-                              fontStyle: FontStyle.italic,
+          ),
+          Row(
+            children: [
+              Expanded(
+                child: SingleChildScrollView(
+                  physics: const NeverScrollableScrollPhysics(),
+                  child: Container(
+                    height: MediaQuery.of(context).size.height,
+                    margin: const EdgeInsets.only(top: kToolbarHeight),
+                    child: Image.asset(
+                      'assets/images/shwelar_dealer.png',
+                      fit: BoxFit.contain,
+                    ), //Center
+                  ),
+                ),
+              ),
+              Expanded(
+                child: SafeArea(
+                  child: !isClickedStartPlaying
+                      ? Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Image.asset(
+                              'assets/images/shwelar_splash.png',
+                              fit: BoxFit.cover,
                             ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 30.0),
-                            child: ShwelarButton(
-                              onTap: () {
-                                setState(() {
-                                  isClickedStartPlaying =
-                                      !isClickedStartPlaying;
-                                });
-                              },
-                              text: StringUtils.StartPlaying,
+                            Text(
+                              StringUtils.LimitlessCasinoExperience,
+                              style: GoogleFonts.sansita(
+                                textStyle:
+                                    Theme.of(context).textTheme.headline4,
+                                fontSize: 22,
+                                color: Colors.white,
+                                fontWeight: FontWeight.w400,
+                                fontStyle: FontStyle.italic,
+                              ),
                             ),
-                          ),
-                          const Spacer(),
-                          Text(
-                            StringUtils.RightsReserved,
-                            style: GoogleFonts.roboto(
-                              textStyle: Theme.of(context).textTheme.headline4,
-                              fontSize: 14,
-                              color: Colors.grey,
-                              fontWeight: FontWeight.w400,
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 30.0),
+                              child: ShwelarButton(
+                                onTap: () {
+                                  setState(() {
+                                    isClickedStartPlaying =
+                                        !isClickedStartPlaying;
+                                  });
+                                },
+                                text: StringUtils.StartPlaying.toUpperCase(),
+                              ),
                             ),
-                          ),
-                        ],
-                      )
-                    : SingleChildScrollView(
-                        child: Padding(
-                          padding: const EdgeInsets.all(20.0),
-                          child: Form(
-                            key: _formKey,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      vertical: 20.0),
-                                  child: Text(
-                                    StringUtils.AccountLogin,
-                                    style: GoogleFonts.saira(
-                                      textStyle:
-                                          Theme.of(context).textTheme.headline4,
-                                      fontSize: 24,
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.w800,
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(
-                                  // height: 55,
-                                  child: TextFormField(
-                                    style: GoogleFonts.saira(
-                                      textStyle:
-                                          Theme.of(context).textTheme.headline4,
-                                      fontSize: 16,
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.w800,
-                                    ),
-                                    focusNode: _userNameFocus,
-                                    controller: userNameController,
-                                    textInputAction: TextInputAction.next,
-                                    textAlignVertical: TextAlignVertical.center,
-                                    onEditingComplete: () =>
-                                        _userNameFocus.unfocus(),
-                                    keyboardType: TextInputType.text,
-                                    onFieldSubmitted: (term) =>
-                                        _fieldFocusChange(
-                                            context, _userNameFocus, _pwdFocus),
-                                    decoration: const InputDecoration(
-                                      contentPadding: EdgeInsets.all(0),
-                                      enabledBorder: OutlineInputBorder(
-                                          borderSide: BorderSide(
-                                              width: 2,
-                                              color: Colors.grey,
-                                              style: BorderStyle.solid)),
-                                      prefixIcon: Padding(
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 10.0),
-                                        child: Icon(
-                                          Icons.person,
-                                          color: Colors.grey,
-                                          size: 32,
-                                        ),
+                            const Spacer(),
+                            Text(
+                              StringUtils.RightsReserved,
+                              style: GoogleFonts.roboto(
+                                textStyle:
+                                    Theme.of(context).textTheme.headline4,
+                                fontSize: 14,
+                                color: Colors.grey,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                          ],
+                        )
+                      : SingleChildScrollView(
+                          physics: const BouncingScrollPhysics(),
+                          child: Padding(
+                            padding: const EdgeInsets.all(20.0),
+                            child: Form(
+                              key: _formKey,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 20.0),
+                                    child: Text(
+                                      StringUtils.AccountLogin,
+                                      style: GoogleFonts.saira(
+                                        textStyle: Theme.of(context)
+                                            .textTheme
+                                            .headline4,
+                                        fontSize: 24,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w800,
                                       ),
-                                      hintText: StringUtils.UserName,
-                                      hintStyle: TextStyle(
-                                          color: Colors.grey,
-                                          fontWeight: FontWeight.bold),
-                                      border: OutlineInputBorder(
-                                          borderSide: BorderSide(
-                                              width: 5,
-                                              color: Colors.red,
-                                              style: BorderStyle.solid)),
                                     ),
-                                    validator: (value) {
-                                      if (value!.isEmpty) {
-                                        return 'Please enter username ';
-                                      } else {
-                                        return null;
-                                      }
-                                    },
                                   ),
-                                ),
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                SizedBox(
-                                  // height: 55,
-                                  child: TextFormField(
-                                    style: GoogleFonts.saira(
-                                      textStyle:
-                                          Theme.of(context).textTheme.headline4,
-                                      fontSize: 16,
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.w800,
-                                    ),
-                                    focusNode: _pwdFocus,
-                                    controller: passwordController,
-                                    textInputAction: TextInputAction.done,
-                                    keyboardType: TextInputType.visiblePassword,
-                                    obscureText: _obscureText,
-                                    textAlignVertical: TextAlignVertical.center,
-                                    onEditingComplete: () =>
-                                        _pwdFocus.unfocus(),
-                                    onFieldSubmitted: (t) =>
-                                        _pwdFocus.unfocus(),
-                                    decoration: const InputDecoration(
+                                  SizedBox(
+                                    // height: 55,
+                                    child: TextFormField(
+                                      style: GoogleFonts.saira(
+                                        textStyle: Theme.of(context)
+                                            .textTheme
+                                            .headline4,
+                                        fontSize: 16,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w800,
+                                      ),
+                                      focusNode: _userNameFocus,
+                                      controller: userNameController,
+                                      textInputAction: TextInputAction.next,
+                                      textAlignVertical:
+                                          TextAlignVertical.center,
+                                      onEditingComplete: () =>
+                                          _userNameFocus.unfocus(),
+                                      keyboardType: TextInputType.text,
+                                      onFieldSubmitted: (term) =>
+                                          _fieldFocusChange(context,
+                                              _userNameFocus, _pwdFocus),
+                                      decoration: const InputDecoration(
                                         contentPadding: EdgeInsets.all(0),
                                         enabledBorder: OutlineInputBorder(
                                             borderSide: BorderSide(
@@ -230,64 +184,126 @@ class _AuthWidgetState extends State<AuthWidget> {
                                           padding: EdgeInsets.symmetric(
                                               horizontal: 10.0),
                                           child: Icon(
-                                            Icons.key,
+                                            Icons.person,
                                             color: Colors.grey,
                                             size: 32,
                                           ),
                                         ),
-                                        hintText: StringUtils.Password,
+                                        hintText: StringUtils.UserName,
                                         hintStyle: TextStyle(
                                             color: Colors.grey,
                                             fontWeight: FontWeight.bold),
                                         border: OutlineInputBorder(
                                             borderSide: BorderSide(
                                                 width: 5,
-                                                color: Colors.white,
-                                                style: BorderStyle.solid))),
-                                    validator: (value) {
-                                      if (value!.isEmpty) {
-                                        return 'Please enter password';
-                                      } else {
-                                        return null;
+                                                color: Colors.red,
+                                                style: BorderStyle.solid)),
+                                      ),
+                                      validator: (value) {
+                                        if (value!.isEmpty) {
+                                          return 'Please enter username ';
+                                        } else {
+                                          return null;
+                                        }
+                                      },
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  SizedBox(
+                                    // height: 55,
+                                    child: TextFormField(
+                                      style: GoogleFonts.saira(
+                                        textStyle: Theme.of(context)
+                                            .textTheme
+                                            .headline4,
+                                        fontSize: 16,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w800,
+                                      ),
+                                      focusNode: _pwdFocus,
+                                      controller: passwordController,
+                                      textInputAction: TextInputAction.done,
+                                      keyboardType:
+                                          TextInputType.visiblePassword,
+                                      obscureText: _obscureText,
+                                      textAlignVertical:
+                                          TextAlignVertical.center,
+                                      onEditingComplete: () =>
+                                          _pwdFocus.unfocus(),
+                                      onFieldSubmitted: (t) =>
+                                          _pwdFocus.unfocus(),
+                                      decoration: const InputDecoration(
+                                          contentPadding: EdgeInsets.all(0),
+                                          enabledBorder: OutlineInputBorder(
+                                              borderSide: BorderSide(
+                                                  width: 2,
+                                                  color: Colors.grey,
+                                                  style: BorderStyle.solid)),
+                                          prefixIcon: Padding(
+                                            padding: EdgeInsets.symmetric(
+                                                horizontal: 10.0),
+                                            child: Icon(
+                                              Icons.key,
+                                              color: Colors.grey,
+                                              size: 32,
+                                            ),
+                                          ),
+                                          hintText: StringUtils.Password,
+                                          hintStyle: TextStyle(
+                                              color: Colors.grey,
+                                              fontWeight: FontWeight.bold),
+                                          border: OutlineInputBorder(
+                                              borderSide: BorderSide(
+                                                  width: 5,
+                                                  color: Colors.white,
+                                                  style: BorderStyle.solid))),
+                                      validator: (value) {
+                                        if (value!.isEmpty) {
+                                          return 'Please enter password';
+                                        } else {
+                                          return null;
+                                        }
+                                      },
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 15,
+                                  ),
+                                  ShwelarButton(
+                                    text: StringUtils.EnterGame.toUpperCase(),
+                                    onTap: () {
+                                      final FormState? form =
+                                          _formKey.currentState;
+                                      if (_formKey.currentState!.validate()) {
+                                        form!.save();
+                                        _authStore.getAuth(
+                                            name: userNameController.text,
+                                            password: passwordController.text,
+                                            success: () {
+                                              _profileStore.getPlayerSurce(
+                                                  success: () {
+                                                RouteUtils.changeRoute<
+                                                        HomeModule>(
+                                                    HomeRoutes.root,
+                                                    isReplace: true);
+                                              });
+                                            });
                                       }
                                     },
                                   ),
-                                ),
-                                const SizedBox(
-                                  height: 15,
-                                ),
-                                ShwelarButton(
-                                  text: StringUtils.EnterGame,
-                                  onTap: () {
-                                    final FormState? form =
-                                        _formKey.currentState;
-                                    if (_formKey.currentState!.validate()) {
-                                      form!.save();
-                                      _authStore.getAuth(
-                                          name: userNameController.text,
-                                          password: passwordController.text,
-                                          success: () {
-                                            _profileStore.getPlayerSurce(
-                                                success: () {
-                                              RouteUtils.changeRoute<
-                                                      HomeModule>(
-                                                  HomeRoutes.root,
-                                                  isReplace: true);
-                                            });
-                                          });
-                                    }
-                                  },
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
                         ),
-                      ),
+                ),
               ),
-            ),
-          ],
-        )
-      ]),
+            ],
+          )
+        ],
+      ),
     );
   }
 
