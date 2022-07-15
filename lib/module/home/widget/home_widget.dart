@@ -72,29 +72,33 @@ class _HomeWidgetState extends State<HomeWidget> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         //
-                        Row(
-                          children: [
-                            Container(
-                              width: 35,
-                              height: 35,
-                              margin: const EdgeInsets.all(10),
-                              decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(40)),
-                            ),
-                            const Text(
-                              "Ko Htut",
-                              style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white),
-                            ),
-                          ],
+                        Padding(
+                          padding: const EdgeInsets.only(left: 20.0),
+                          child: Row(
+                            children: [
+                              Container(
+                                width: 35,
+                                height: 35,
+                                margin: const EdgeInsets.all(10),
+                                decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(40)),
+                                child: const Icon(Icons.person),
+                              ),
+                              const Text(
+                                "Ko Htut",
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white),
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                     ),
                     Container(
-                      margin: EdgeInsets.only(right: 15, top: 5, bottom: 5),
+                      margin: const EdgeInsets.only(right: 20, top: 5, bottom: 5),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.center,
