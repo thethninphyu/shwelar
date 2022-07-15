@@ -1,7 +1,8 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:shwelar/config/config.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:shwelar/module/auth/store/auth_store.dart';
 
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -13,6 +14,10 @@ class GamePlayWiget extends StatefulWidget {
 }
 
 class _GamePlayWigetState extends State<GamePlayWiget> {
+
+   final AuthStore _authStore = Modular.get<AuthStore>();
+
+   
   @override
   void initState() {
     super.initState();
@@ -23,9 +28,9 @@ class _GamePlayWigetState extends State<GamePlayWiget> {
 // launcher/{game}/{token}
   @override
   Widget build(BuildContext context) {
-    return const WebView(
+    return  WebView(
       initialUrl:
-          'https://game.kohtut.me/launcher/AncientRichesCasinoGM/${Config.token}',
+          'https://game.kohtut.me/launcher/AncientRichesCasinoGM/${_authStore.token}',
       debuggingEnabled: true,
       javascriptMode: JavascriptMode.unrestricted,
       allowsInlineMediaPlayback: true,

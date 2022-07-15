@@ -17,11 +17,11 @@ class _$APIService extends APIService {
   final definitionType = APIService;
 
   @override
-  Future<Response<dynamic>> login(String username, String password) {
+  Future<Response<Auth>> login(String username, String password) {
     final $url = '/api/login';
     final $body = <String, dynamic>{'username': username, 'password': password};
     final $request = Request('POST', $url, client.baseUrl, body: $body);
-    return client.send<dynamic, dynamic>($request,
+    return client.send<Auth, Auth>($request,
         requestConverter: FormUrlEncodedConverter.requestFactory);
   }
 

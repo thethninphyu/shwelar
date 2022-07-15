@@ -7,8 +7,10 @@ part of 'serializers.dart';
 // **************************************************************************
 
 Serializers _$serializers = (new Serializers().toBuilder()
+      ..add(Auth.serializer)
       ..add(Game.serializer)
       ..add(GameListResponse.serializer)
+      ..add(Key.serializer)
       ..add(Meta.serializer)
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(Game)]),
