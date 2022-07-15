@@ -1,56 +1,58 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class ShwelarButton extends StatelessWidget {
   final String text;
-  final double? width;
-  final double?height;
-  final Function onTap;
-  final Color? backgroundColor;
-  final Color? textColor;
-  final double? textSize;
-  final Widget? leading;
-  final Widget? tailing;
-  final BorderRadius? borderRadius;
+  final Function() onTap;
   const ShwelarButton({
     Key? key,
     required this.text,
     required this.onTap,
-    this.width,
-    this.height,
-    this.backgroundColor,
-    this.textColor,
-    this.textSize,
-    this.leading,
-    this.tailing,
-    this.borderRadius,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return MaterialButton(
-      minWidth: width ?? MediaQuery.of(context).size.width,
-      height: height ?? 48,
-      shape: RoundedRectangleBorder(
-        borderRadius: borderRadius ?? BorderRadius.circular(100.0),
-      ),
-      color: backgroundColor ?? Colors.white,
-      textColor: textColor ?? const Color(0xFF424242),
-      disabledTextColor:
-          (textColor ?? const Color(0xFF424242)).withOpacity(0.6),
-      disabledColor: (backgroundColor ?? Colors.white).withAlpha(200),
-      onPressed: onTap(),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          leading ?? const SizedBox(),
-          Text(
-            text.toUpperCase(),
-            style: TextStyle(fontSize: textSize ?? 14),
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+        margin: const EdgeInsets.all(4.0),
+        padding: const EdgeInsets.all(8.0),
+        alignment: Alignment.center,
+        width: 300,
+        height: 48,
+        decoration: ShapeDecoration(
+            shadows: const [
+              BoxShadow(
+                color: Color.fromARGB(255, 20, 12, 38),
+                spreadRadius: 5,
+                blurRadius: 15,
+                offset: Offset(0, 3),
+              )
+            ],
+            gradient: const LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  Color.fromARGB(225, 113, 84, 195),
+                  Color.fromARGB(255, 58, 36, 123)
+                ]),
+            shape: BeveledRectangleBorder(
+              borderRadius: BorderRadius.circular(24),
+              side: const BorderSide(
+                style: BorderStyle.solid,
+                width: 2,
+                color: Color.fromARGB(255, 113, 77, 255),
+              ),
+            )),
+        child: Text(
+          text,
+          style: GoogleFonts.saira(
+            textStyle: Theme.of(context).textTheme.headline4,
+            fontSize: 16,
+            color: Colors.white,
+            fontWeight: FontWeight.w800,
           ),
-          tailing ?? const SizedBox(),
-        ],
+        ),
       ),
     );
   }
